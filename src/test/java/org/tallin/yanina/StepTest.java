@@ -18,9 +18,10 @@ public class StepTest {
         open("http://51.250.6.164:3000/signin");
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--incognito");
+        chromeOptions.addArguments("--no-sandbox");
+        chromeOptions.addArguments("--disable-gpu");
         Configuration.browserCapabilities = chromeOptions;
         Configuration.headless = true;
-
     }
 
     @Test
