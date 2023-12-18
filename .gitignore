@@ -32,3 +32,4 @@ nbdist/
 
 #Mac OS
 .DS_Store
+/src/test/resources/application.yaml

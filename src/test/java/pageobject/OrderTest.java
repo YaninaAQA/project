@@ -3,27 +3,32 @@ package pageobject;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
+import inheritance.BaseSetupApi;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import utils.ApiClient;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.open;
 
-public class OrderTest {
+public class OrderTest extends BaseSetupApi {
+
+    private static String token;
     OrderPage orderPage = new OrderPage();
 
 
     @BeforeAll
     public static void setUpAll() {
         Configuration.browserSize = "1280x800";
+        token = ApiClient.getBearerToken();
     }
 
     @BeforeEach
-    public void setUp() {
-        open("http://51.250.6.164:3000/signin");
-        Selenide.localStorage().setItem("jwt", "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ5YW5pbmFhcWEiLCJleHAiOjE3MDEzNzY2NjQsImlhdCI6MTcwMTM1ODY2NH0.C-VeKQrEWOFNMiwn8i7GIT0aZATcesXGUARwPIdFT4gJ3d14ar1_ZrZg54PhluBV_hI4xPIcOf1ZZpdgeoJ3FQ");
+    public void setUpUi() {
+        open(configuration.getString("ui-url"));
+        Selenide.localStorage().setItem("jwt", token);
         Selenide.refresh();
     }
 

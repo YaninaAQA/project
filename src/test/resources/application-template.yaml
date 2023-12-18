@@ -1,0 +1,8 @@
+api:
+  base-url:
+ui:
+  ui-url:
+
+user:
+  username:
+  password:
