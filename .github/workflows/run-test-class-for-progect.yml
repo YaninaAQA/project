@@ -1,0 +1,27 @@
+name: Java CI with TestClass as maven parameter
+
+on:
+  workflow_dispatch:
+    schedule:
+      - cron: "30 2 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set Test Class Name
+        run: echo "The value of input parameter is --> ${{ inputs.testClassName }}"
+
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+          
+      - name: Run tests
+        run: mvn test -Dtest=${{ inputs.testClassName }}
