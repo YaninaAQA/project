@@ -15,13 +15,18 @@ public class StepTest {
 
     @BeforeEach
     public void setUp() {
-        open("http://51.250.6.164:3000/signin");
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--incognito");
-        chromeOptions.addArguments("--no-sandbox");
-        chromeOptions.addArguments("--disable-gpu");
-        Configuration.browserCapabilities = chromeOptions;
+        Configuration.browser = "chrome"; // or whatever browser you are using
         Configuration.headless = true;
+        Configuration.browserCapabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions());
+        open("http://51.250.6.164:3000/signin");
+    }
+
+    private static ChromeOptions chromeOptions() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--incognito");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-gpu");
+        return options;
     }
 
     @Test
