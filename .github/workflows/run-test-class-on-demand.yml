@@ -15,7 +15,6 @@ jobs:
       - name: Set Test Class Name
         run: echo "The value of input parameter is --> ${{ inputs.testClassName }}"
 
-
       - name: Checkout repository
         uses: actions/checkout@v2
 
@@ -37,8 +36,5 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
 
-      - name: Set up ChromeDriver
-        uses: browser-actions/setup-chromedriver@latest
-          
       - name: Run tests
         run: mvn test -Dtest=${{ inputs.testClassName }}
